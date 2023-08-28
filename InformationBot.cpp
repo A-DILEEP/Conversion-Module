@@ -14,9 +14,9 @@ void printWithTyping(const string &text, int delayMillis)
     cout << endl;
 }
 
-void converting_Money(int From, int To, double amount);
+void converting_Money(int From, int To, float amount);
 
-void changingtoInt(string fromcurrency, string tocurrency, double amount)
+void changingtoInt(string fromcurrency, string tocurrency, float amount)
 {
     int FromCurrency, ToCurrency;
     if (fromcurrency == "USD")
@@ -30,6 +30,10 @@ void changingtoInt(string fromcurrency, string tocurrency, double amount)
     else if (fromcurrency == "GBP")
     {
         FromCurrency = 3;
+    }
+    else if (fromcurrency == "EUR")
+    {
+        FromCurrency = 4;
     }
     else
     {
@@ -47,15 +51,20 @@ void changingtoInt(string fromcurrency, string tocurrency, double amount)
     {
         ToCurrency = 3;
     }
+    else if (tocurrency == "EUR")
+    {
+        ToCurrency = 4;
+    }
     else
     {
         cout << "Invalid Input !" << endl;
     }
+    cout << fixed << setprecision(2);
     converting_Money(FromCurrency, ToCurrency, amount);
 }
-void converting_Money(int From, int To, double amount)
+void converting_Money(int From, int To, float amount)
 {
-    string resultText = ""; // This string will hold the final result
+    string resultText = "";
     double convertedAmount;
     switch (From)
     {
@@ -66,13 +75,16 @@ void converting_Money(int From, int To, double amount)
             resultText = to_string(amount) + " USD";
             break;
         case 2:
-            convertedAmount = amount * 85;
+            convertedAmount = amount * 82.5299;
             resultText = to_string(amount) + " of USD is equals to " + to_string(convertedAmount) + " INR";
             break;
         case 3:
             convertedAmount = amount * 0.7945;
             resultText = to_string(amount) + " of USD is equals to " + to_string(convertedAmount) + " GBP";
             break;
+        case 4:
+            convertedAmount = amount * 0.92626;
+            resultText = to_string(amount) + " of USD is equals to " + to_string(convertedAmount) + " EUR";
         default:
             break;
         }
@@ -81,16 +93,19 @@ void converting_Money(int From, int To, double amount)
         switch (To)
         {
         case 1:
-            convertedAmount = amount / 85;
+            convertedAmount = amount / 82.5299;
             resultText = to_string(amount) + " of INR is equals to " + to_string(convertedAmount) + " USD";
             break;
         case 2:
             cout << to_string(amount) + " Rupee";
             break;
         case 3:
-            convertedAmount = amount / 103;
+            convertedAmount = amount / 103.794;
             resultText = to_string(amount) + " of Indian rupee is equals to " + to_string(convertedAmount) + " Pounds";
             break;
+        case 4:
+            convertedAmount = amount * 0.01122;
+            resultText = to_string(amount) + " of INR is equaks to " + to_string(convertedAmount) + " EUR";
         default:
             break;
         }
@@ -113,11 +128,28 @@ void converting_Money(int From, int To, double amount)
             break;
         }
         break;
-
+    case 4:
+        switch (To)
+        {
+        case 1:
+            convertedAmount = amount * 1.07933;
+            resultText = to_string(amount) + " of EUR is equals to " + to_string(convertedAmount) + " USD";
+            break;
+        case 2:
+            convertedAmount = amount * 89.0768;
+            resultText = to_string(amount) + " of EUR is equals to " + to_string(convertedAmount) + " INR";
+            break;
+        case 3:
+            convertedAmount = amount * 0.85795;
+            resultText = to_string(amount) + " of EUR is equals to " + to_string(convertedAmount) + " GBP";
+        case 4:
+            resultText = to_string(amount) + " of EUR is equals to " + to_string(amount) + " EUR";
+        default:
+            break;
+        }
     default:
         break;
     }
-
     printWithTyping(resultText, 100);
 }
 
@@ -126,11 +158,10 @@ int main()
     double amount;
     string fromcurrency, tocurrency;
     string state = "";
-    state = "***************************** Hello User ! *****************************";
-    printWithTyping(state, 40);
+    cout << "***************************** Hello User ! *****************************" << endl;
     state = "Welcome to Currency Conversion Bot !";
     printWithTyping(state, 40);
-    state = "Availabe currencies : USD , INR ,GBP";
+    state = "Availabe currencies : USD , INR , GBP , EUR";
     printWithTyping(state, 40);
     state = "Enter from which currency you want to convert from : ";
     printWithTyping(state, 40);
@@ -143,6 +174,5 @@ int main()
     cin >> amount;
     cout << endl;
     changingtoInt(fromcurrency, tocurrency, amount);
-
     return 0;
 }
