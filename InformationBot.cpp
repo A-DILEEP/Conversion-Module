@@ -2,60 +2,174 @@
 #include <iomanip>
 #include <chrono>
 #include <thread>
+#include <stdlib.h>
 using namespace std;
-
-void printWithTyping(const string &text, int delayMillis)
+void convertingTemperature(int FromTemperature, int ToTemperature, float value);
+void printWithTyping(const string &statement, int timedelay)
 {
-    for (char c : text)
+    for (char c : statement)
     {
         cout << c << flush;
-        this_thread::sleep_for(chrono::milliseconds(delayMillis));
+        this_thread::sleep_for(chrono::milliseconds(timedelay));
     }
     cout << endl;
 }
 
-void converting_Money(int From, int To, double amount);
+void converting_Money(int From, int To, float amount);
 
-void changingtoInt(string fromcurrency, string tocurrency, double amount)
+void changingtoInt(string from, string to, float value)
 {
-    int FromCurrency, ToCurrency;
-    if (fromcurrency == "USD")
+    int From, To;
+    if (from == "USD" || from == "Celsius")
     {
-        FromCurrency = 1;
+        From = 1;
     }
-    else if (fromcurrency == "INR")
+    else if (from == "INR" || from == "Fahrenheit")
     {
-        FromCurrency = 2;
+        From = 2;
     }
-    else if (fromcurrency == "GBP")
+    else if (from == "GBP" || from == "Kelvin")
     {
-        FromCurrency = 3;
+        From = 3;
+    }
+    else if (from == "EUR" || from == "Rankine")
+    {
+        From = 4;
     }
     else
     {
         cout << "InValid input !" << endl;
     }
-    if (tocurrency == "USD")
+    if (to == "USD" || to == "Celsius")
     {
-        ToCurrency = 1;
+        To = 1;
     }
-    else if (tocurrency == "INR")
+    else if (to == "INR" || to == "Fahrenheit")
     {
-        ToCurrency = 2;
+        To = 2;
     }
-    else if (tocurrency == "GBP")
+    else if (to == "GBP" || to == "Kelvin")
     {
-        ToCurrency = 3;
+        To = 3;
+    }
+    else if (to == "EUR" || to == "Rankine")
+    {
+        To = 4;
     }
     else
     {
         cout << "Invalid Input !" << endl;
     }
-    converting_Money(FromCurrency, ToCurrency, amount);
+    if (from == "USD" || from == "INR" || from == "GBP" || from == "EUR")
+    {
+        converting_Money(From, To, value);
+    }
+    else
+    {
+        convertingTemperature(From, To, value);
+    }
 }
-void converting_Money(int From, int To, double amount)
+void convertingTemperature(int FromTemperature, int ToTemperature, float value)
 {
-    string resultText = ""; // This string will hold the final result
+    string statem = "";
+    float Converted_Temperature;
+    switch (FromTemperature)
+    {
+    case 1:
+        switch (ToTemperature)
+        {
+        case 1:
+            printWithTyping("You Entered same Temperature values ", 40);
+            cout << value << " celsius";
+            break;
+        case 2:
+            Converted_Temperature = value * 9 / 5 + 32;
+            cout << value << " of Celsius Temperature is equals to " << setprecision(6) << Converted_Temperature << " of Fahrenheit";
+            break;
+        case 3:
+            Converted_Temperature = value + 273.15;
+            cout << value << " of Celsius Temperature is equals to " << setprecision(6) << Converted_Temperature << " of Kelvin";
+            break;
+        case 4:
+            Converted_Temperature = (value + 273.15) * 9 / 5;
+            cout << value << " of Celsius Temperature is equals to " << setprecision(6) << Converted_Temperature << " of Rankine";
+            break;
+        default:
+            break;
+        }
+        break;
+    case 2:
+        switch (ToTemperature)
+        {
+        case 1:
+            Converted_Temperature = (value - 32) * 5 / 9;
+            cout << value << " of Fahrenheit is equals to " << setprecision(6) << Converted_Temperature << " of Celsius";
+            break;
+        case 2:
+            printWithTyping("You Entered same Temperature values ", 40);
+            cout << value << " celsius";
+            break;
+        case 3:
+            Converted_Temperature = (value + 459.67) * 5 / 9;
+            cout << value << " of Fahrenheit is equals to " << setprecision(6) << Converted_Temperature << " of Kelvin";
+            break;
+        case 4:
+            Converted_Temperature = value + 459.67;
+            cout << value << " of Fahrenheit is equals to " << setprecision(6) << Converted_Temperature << " of Rankine";
+            break;
+        default:
+            break;
+        }
+    case 3:
+        switch (ToTemperature)
+        {
+        case 1:
+            Converted_Temperature = value - 273.15;
+            cout << value << " of Kelvin is equals to " << setprecision(6) << Converted_Temperature << " of Celsius";
+            break;
+        case 2:
+            Converted_Temperature = value * 9 / 5 - 459.67;
+            cout << value << " of Kelvin is equals to " << setprecision(6) << Converted_Temperature << " of Fahrenheit";
+            break;
+        case 3:
+            printWithTyping("You Entered same Temperature values ", 40);
+            cout << value << " celsius";
+            break;
+        case 4:
+            Converted_Temperature = value * 9 / 5;
+            cout << value << " of Kelvin is equals to " << setprecision(6) << Converted_Temperature << " of Rankine";
+        default:
+            break;
+        }
+    case 4:
+        switch (ToTemperature)
+        {
+        case 1:
+            Converted_Temperature = value * 5 / 9 - 273.15;
+            cout << value << " of Rankine is equals to " << setprecision(6) << Converted_Temperature << " of Celsius";
+            break;
+        case 2:
+            Converted_Temperature = value - 459.67;
+            cout << value << " of Rankine is equals to " << setprecision(6) << Converted_Temperature << " of Fahrenheit";
+            break;
+        case 3:
+            Converted_Temperature = value * 5 / 9;
+            cout << value << " of Rankine is equals to " << setprecision(6) << Converted_Temperature << " of Kelvin";
+            break;
+        case 4:
+            printWithTyping("You Entered same Temperature values ", 40);
+            cout << value << " celsius";
+            break;
+        default:
+            break;
+        }
+    default:
+        break;
+    }
+}
+void converting_Money(int From, int To, float amount)
+{
+    string resultText = "";
     double convertedAmount;
     switch (From)
     {
@@ -64,15 +178,19 @@ void converting_Money(int From, int To, double amount)
         {
         case 1:
             resultText = to_string(amount) + " USD";
+            printWithTyping(resultText, 40);
             break;
         case 2:
-            convertedAmount = amount * 85;
-            resultText = to_string(amount) + " of USD is equals to " + to_string(convertedAmount) + " INR";
+            convertedAmount = amount * 82.5299;
+            cout << setprecision(8) << amount << " of USD is equals to " << setprecision(8) << convertedAmount << " of INR";
             break;
         case 3:
             convertedAmount = amount * 0.7945;
-            resultText = to_string(amount) + " of USD is equals to " + to_string(convertedAmount) + " GBP";
+            cout << setprecision(8) << amount << " of USD is equals to " << setprecision(8) << convertedAmount << " of GBP";
             break;
+        case 4:
+            convertedAmount = amount * 0.92626;
+            cout << setprecision(6) << amount << " of USD is equals to " << setprecision(8) << convertedAmount << " of EUR";
         default:
             break;
         }
@@ -81,16 +199,20 @@ void converting_Money(int From, int To, double amount)
         switch (To)
         {
         case 1:
-            convertedAmount = amount / 85;
-            resultText = to_string(amount) + " of INR is equals to " + to_string(convertedAmount) + " USD";
+            convertedAmount = amount / 82.5299;
+            cout << setprecision(8) << amount << " of INR is equals to " << setprecision(8) << convertedAmount << " of USD";
             break;
         case 2:
             cout << to_string(amount) + " Rupee";
+            printWithTyping(resultText, 40);
             break;
         case 3:
-            convertedAmount = amount / 103;
-            resultText = to_string(amount) + " of Indian rupee is equals to " + to_string(convertedAmount) + " Pounds";
+            convertedAmount = amount / 103.794;
+            cout << setprecision(8) << amount << " of INR is equals to " << setprecision(8) << convertedAmount << " of GBP";
             break;
+        case 4:
+            convertedAmount = amount * 0.01122;
+            cout << setprecision(8) << amount << " of INR is equals to " << setprecision(8) << convertedAmount << " of EUR";
         default:
             break;
         }
@@ -100,37 +222,58 @@ void converting_Money(int From, int To, double amount)
         {
         case 1:
             convertedAmount = amount * 1.25;
-            resultText = to_string(amount) + " of Pounds is equals to " + to_string(convertedAmount) + " USD";
+            cout << setprecision(8) << amount << " of GBP is equals to " << setprecision(8) << convertedAmount << " of USD";
             break;
         case 2:
             convertedAmount = amount * 103.9;
-            resultText = to_string(amount) + " of pounds is equals to " + to_string(convertedAmount) + " INR";
+            cout << setprecision(8) << amount << " of GBP is equals to " << setprecision(8) << convertedAmount << " of INR";
             break;
         case 3:
             resultText = to_string(amount) + " Pounds";
+            printWithTyping(resultText, 40);
             break;
+        case 4:
+            convertedAmount = amount * 1.16;
+            cout << setprecision(8) << amount << " of GBP is equals to " << setprecision(8) << convertedAmount << " of EUR";
         default:
             break;
         }
         break;
-
+    case 4:
+        switch (To)
+        {
+        case 1:
+            convertedAmount = amount * 1.07933;
+            cout << setprecision(8) << amount << " of EUR is equals to " << setprecision(8) << convertedAmount << " of USD";
+            break;
+        case 2:
+            convertedAmount = amount * 89.0768;
+            cout << setprecision(8) << amount << " of EUR is equals to " << setprecision(8) << convertedAmount << " of INR";
+            break;
+        case 3:
+            convertedAmount = amount * 0.85795;
+            cout << setprecision(8) << amount << " of EUR is equals to " << setprecision(8) << convertedAmount << " of GBP";
+            break;
+        case 4:
+            resultText = to_string(amount) + " Pounds";
+            printWithTyping(resultText, 40);
+            break;
+        default:
+            break;
+        }
     default:
         break;
     }
-
-    printWithTyping(resultText, 100);
 }
-
-int main()
+void moneyconversion()
 {
     double amount;
     string fromcurrency, tocurrency;
     string state = "";
-    state = "***************************** Hello User ! *****************************";
-    printWithTyping(state, 40);
+    cout << "***************************** Hello User ! *****************************" << endl;
     state = "Welcome to Currency Conversion Bot !";
     printWithTyping(state, 40);
-    state = "Availabe currencies : USD , INR ,GBP";
+    state = "Availabe currencies : USD , INR , GBP , EUR";
     printWithTyping(state, 40);
     state = "Enter from which currency you want to convert from : ";
     printWithTyping(state, 40);
@@ -143,6 +286,44 @@ int main()
     cin >> amount;
     cout << endl;
     changingtoInt(fromcurrency, tocurrency, amount);
-
-    return 0;
+}
+void temperatureconversion()
+{
+    string statem;
+    string from, to;
+    float value;
+    statem = "Welcome to Temperature Conversion ";
+    printWithTyping(statem, 40);
+    statem = "Available Temperatures Celsius , Fahrenheit , Kelvin , Rankine ";
+    printWithTyping(statem, 40);
+    printWithTyping("Enter from which temprature you want to convert From :", 40);
+    cin >> from;
+    printWithTyping("Enter to which Temperature it should converts to :", 40);
+    cin >> to;
+    statem = "Enter how much " + from + "Temperature it should converts to " + to;
+    printWithTyping(statem, 40);
+    cin >> value;
+    changingtoInt(from, to, value);
+}
+int main()
+{
+    int choice;
+    printWithTyping("Hello user welcome to The Information Bot", 40);
+    printWithTyping("Available Data :", 40);
+    printWithTyping("1: conversion of Currency ", 40);
+    printWithTyping("2: Conversion of Temperature", 40);
+    printWithTyping("Pick a choice from above :", 40);
+    cin >> choice;
+    system("cls");
+    switch (choice)
+    {
+    case 1:
+        moneyconversion();
+        break;
+    case 2:
+        temperatureconversion();
+        break;
+    default:
+        break;
+    }
 }
