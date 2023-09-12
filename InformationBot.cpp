@@ -36,6 +36,10 @@ void changingtoInt(string from, string to, float value)
     {
         From = 4;
     }
+    else if (from == "JPY")
+    {
+        From = 5;
+    }
     else
     {
         cout << "InValid input !" << endl;
@@ -55,6 +59,10 @@ void changingtoInt(string from, string to, float value)
     else if (to == "EUR" || to == "Rankine")
     {
         To = 4;
+    }
+    else if (to == "JPY")
+    {
+        To = 5;
     }
     else
     {
@@ -191,6 +199,11 @@ void converting_Money(int From, int To, float amount)
         case 4:
             convertedAmount = amount * 0.92626;
             cout << setprecision(6) << amount << " of USD is equals to " << setprecision(8) << convertedAmount << " of EUR";
+            break;
+        case 5:
+            convertedAmount = amount * 146.34478;
+            cout << setprecision(6) << amount << " of USD is equals to " << setprecision(8) << convertedAmount << " of JPY";
+            break;
         default:
             break;
         }
@@ -213,6 +226,11 @@ void converting_Money(int From, int To, float amount)
         case 4:
             convertedAmount = amount * 0.01122;
             cout << setprecision(8) << amount << " of INR is equals to " << setprecision(8) << convertedAmount << " of EUR";
+            break;
+        case 5:
+            convertedAmount = amount * 1.7649077;
+            cout << setprecision(6) << amount << " of INR is equals to " << setprecision(8) << convertedAmount << " of JPY";
+            break;
         default:
             break;
         }
@@ -235,6 +253,11 @@ void converting_Money(int From, int To, float amount)
         case 4:
             convertedAmount = amount * 1.16;
             cout << setprecision(8) << amount << " of GBP is equals to " << setprecision(8) << convertedAmount << " of EUR";
+            break;
+        case 5:
+            convertedAmount = amount * 183.35126;
+            cout << setprecision(8) << amount << " of GBP is equals to " << setprecision(8) << convertedAmount << " of JPY";
+            break;
         default:
             break;
         }
@@ -258,6 +281,36 @@ void converting_Money(int From, int To, float amount)
             resultText = to_string(amount) + " Pounds";
             printWithTyping(resultText, 40);
             break;
+        case 5:
+            convertedAmount = amount * 157.01481;
+            cout << setprecision(8) << amount << " of EUR is equals to " << setprecision(8) << convertedAmount << " of JPY";
+            break;
+        default:
+            break;
+        }
+    case 5:
+        switch (To)
+        {
+        case 1:
+            convertedAmount = amount * 0.0068299207;
+            cout << setprecision(8) << amount << " of JPY is equals to " << convertedAmount << " of USD";
+            break;
+        case 2:
+            convertedAmount = amount * 0.56635558;
+            cout << setprecision(8) << amount << " of JPY is equals to " << convertedAmount << " of INR";
+            break;
+        case 3:
+            convertedAmount = amount * 0.0054525644;
+            cout << setprecision(8) << amount << " of JPY is equals to " << convertedAmount << " of GBP";
+            break;
+        case 4:
+            convertedAmount = amount * 0.0063666639;
+            cout << setprecision(8) << amount << " of JPY is equals to " << convertedAmount << " of EUR";
+            break;
+        case 5:
+            resultText = to_string(amount) + " Pounds";
+            printWithTyping(resultText, 40);
+            break;
         default:
             break;
         }
@@ -273,7 +326,7 @@ void moneyconversion()
     cout << "***************************** Hello User ! *****************************" << endl;
     state = "Welcome to Currency Conversion Bot !";
     printWithTyping(state, 40);
-    state = "Availabe currencies : USD , INR , GBP , EUR";
+    state = "Availabe currencies : USD , INR , GBP , EUR , JPY ";
     printWithTyping(state, 40);
     state = "Enter from which currency you want to convert from : ";
     printWithTyping(state, 40);
