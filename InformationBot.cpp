@@ -2,6 +2,8 @@
 #include <iomanip>
 #include <chrono>
 #include <thread>
+#include <map>
+#include <string>
 #include <stdlib.h>
 using namespace std;
 void convertingTemperature(int FromTemperature, int ToTemperature, float value);
@@ -20,23 +22,23 @@ void converting_Money(int From, int To, float amount);
 void changingtoInt(string from, string to, float value)
 {
     int From, To;
-    if (from == "USD" || from == "Celsius")
+    if (from == "USD" || from == "usd" || from == "celsius")
     {
         From = 1;
     }
-    else if (from == "INR" || from == "Fahrenheit")
+    else if (from == "INR" || from == "inr" || from == "fahrenheit")
     {
         From = 2;
     }
-    else if (from == "GBP" || from == "Kelvin")
+    else if (from == "GBP" || from == "gbp" || from == "kelvin")
     {
         From = 3;
     }
-    else if (from == "EUR" || from == "Rankine")
+    else if (from == "EUR" || from == "eur" || from == "rankine")
     {
         From = 4;
     }
-    else if (from == "JPY")
+    else if (from == "JPY" || from == "jpy" )
     {
         From = 5;
     }
@@ -44,23 +46,24 @@ void changingtoInt(string from, string to, float value)
     {
         cout << "InValid input !" << endl;
     }
-    if (to == "USD" || to == "Celsius")
+
+    if (to == "USD" || to == "usd" || to == "celsius")
     {
         To = 1;
     }
-    else if (to == "INR" || to == "Fahrenheit")
+    else if (to == "INR" || to=="inr"|| to == "fahrenheit")
     {
         To = 2;
     }
-    else if (to == "GBP" || to == "Kelvin")
+    else if (to == "GBP" || to == "gbp" || to == "kelvin")
     {
         To = 3;
     }
-    else if (to == "EUR" || to == "Rankine")
+    else if (to == "EUR" || to == "eur" || to == "rankine")
     {
         To = 4;
     }
-    else if (to == "JPY")
+    else if (to == "JPY" || to == "jpy" )
     {
         To = 5;
     }
@@ -68,7 +71,7 @@ void changingtoInt(string from, string to, float value)
     {
         cout << "Invalid Input !" << endl;
     }
-    if (from == "USD" || from == "INR" || from == "GBP" || from == "EUR")
+    if (from == "USD" || from == "INR" || from == "GBP" || from == "EUR" ||from == "usd" || from == "inr" || from == "gbp" || from == "jpy")
     {
         converting_Money(From, To, value);
     }
@@ -360,23 +363,50 @@ void temperatureconversion()
 }
 int main()
 {
-    int choice;
-    printWithTyping("Hello user welcome to The Information Bot", 40);
-    printWithTyping("Available Data :", 40);
-    printWithTyping("1: conversion of Currency ", 40);
-    printWithTyping("2: Conversion of Temperature", 40);
-    printWithTyping("Pick a choice from above :", 40);
-    cin >> choice;
-    system("cls");
-    switch (choice)
+    map<std::string, std::string> credentials;
+    credentials["username1"] = "password1";
+    credentials["username2"] = "password2";
+    credentials["username3"] = "password3";
+
+    string username, password;
+    printWithTyping("Enter username: ",40);
+    cin >> username;
+    if (credentials.find(username) != credentials.end())
     {
-    case 1:
-        moneyconversion();
-        break;
-    case 2:
-        temperatureconversion();
-        break;
-    default:
-        break;
+        printWithTyping("Enter password: ",40);
+        std::cin >> password;
+        if (credentials[username] == password)
+        {
+            std::cout << "Login successful!" <<endl;
+            cout<<endl;
+            int choice;
+            printWithTyping("Hello user welcome to The Information Bot", 40);
+            printWithTyping("Available Data :", 40);
+            printWithTyping("1: conversion of Currency ", 40);
+            printWithTyping("2: Conversion of Temperature", 40);
+            printWithTyping("Pick a choice from above :", 40);
+            cin >> choice;
+            system("cls");
+            switch (choice)
+            {
+            case 1:
+                moneyconversion();
+                break;
+            case 2:
+                temperatureconversion();
+                break;
+            default:
+                break;
+            }
+        }
+        else
+        {
+            std::cout << "Login failed. Incorrect password." << std::endl;
+        }
     }
+    else
+    {
+        std::cout << "Login failed. Username not found." << std::endl;
+    }
+    return 0;
 }
