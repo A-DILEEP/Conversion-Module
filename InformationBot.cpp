@@ -7,6 +7,8 @@
 #include <stdlib.h>
 using namespace std;
 void convertingTemperature(int FromTemperature, int ToTemperature, float value);
+void moneyconversion();
+void temperatureconversion();
 void printWithTyping(const string &statement, int timedelay)
 {
     for (char c : statement)
@@ -48,8 +50,6 @@ void changingtoInt(string from, string to, float value)
         return;
     }
 
-    //---------------------------
-
     if (to == "USD" || to == "usd" || to == "celsius")
     {
         To = 1;
@@ -89,6 +89,7 @@ void changingtoInt(string from, string to, float value)
 void convertingTemperature(int FromTemperature, int ToTemperature, float value)
 {
     string statem = "";
+    string choice;
     float Converted_Temperature;
     switch (FromTemperature)
     {
@@ -187,10 +188,43 @@ void convertingTemperature(int FromTemperature, int ToTemperature, float value)
     default:
         break;
     }
+    cout << endl
+         << "\n";
+    cout << "Do you want to use convertor again ? ";
+    cin >> choice;
+    if (choice == "yes")
+    {
+        int pick_choice;
+        system("cls");
+        cout << "Which conversion you want to use ?" << endl;
+        cout << "1:Currency conversion "
+             << "\n";
+        cout << "2:Temperature Conversion"
+             << "\n";
+        cin >> pick_choice;
+        system("cls");
+
+        switch (pick_choice)
+        {
+        case 1:
+            moneyconversion();
+            break;
+        case 2:
+            temperatureconversion();
+            break;
+        default:
+            break;
+        }
+    }
+    else
+    {
+        cout << "Thank you for using the convertor , have a good day :) ";
+    }
 }
 void converting_Money(int From, int To, float amount)
 {
     string resultText = "";
+    string choice;
     double convertedAmount;
 
     switch (From)
@@ -234,6 +268,7 @@ void converting_Money(int From, int To, float amount)
             cout << to_string(amount) + " Rupee";
             printWithTyping(resultText, 30);
             break;
+            
         case 3:
             convertedAmount = amount / 101.30142;
             cout << setprecision(8) << amount << " of INR is equals to " << setprecision(8) << convertedAmount << " of GBP";
@@ -258,22 +293,27 @@ void converting_Money(int From, int To, float amount)
             convertedAmount = amount * 1.2199653;
             cout << setprecision(8) << amount << " of GBP is equals to " << setprecision(8) << convertedAmount << " of USD";
             break;
+
         case 2:
             convertedAmount = amount * 101.30142;
             cout << setprecision(8) << amount << " of GBP is equals to " << setprecision(8) << convertedAmount << " of INR";
             break;
+
         case 3:
             resultText = to_string(amount) + " Pounds";
             printWithTyping(resultText, 30);
             break;
+
         case 4:
             convertedAmount = amount * 1.1521466;
             cout << setprecision(8) << amount << " of GBP is equals to " << setprecision(8) << convertedAmount << " of EUR";
             break;
+
         case 5:
             convertedAmount = amount * 182.22562;
             cout << setprecision(8) << amount << " of GBP is equals to " << setprecision(8) << convertedAmount << " of JPY";
             break;
+
         default:
             break;
         }
@@ -286,6 +326,7 @@ void converting_Money(int From, int To, float amount)
             convertedAmount = amount * 1.058863;
             cout << setprecision(8) << amount << " of EUR is equals to " << setprecision(8) << convertedAmount << " of USD";
             break;
+            
         case 2:
             convertedAmount = amount * 87.924074;
             cout << setprecision(8) << amount << " of EUR is equals to " << setprecision(8) << convertedAmount << " of INR";
@@ -335,6 +376,36 @@ void converting_Money(int From, int To, float amount)
         break;
     default:
         break;
+    }
+    cout << endl
+         << "\n";
+    cout << "Do you want to use convertor again ? ";
+    cin >> choice;
+    if (choice == "yes")
+    {
+        int pick_choice;
+        system("cls");
+        cout << "Which conversion you want to use ?"<<endl;
+        cout<<"1:Currency conversion "<<"\n";
+        cout<<"2:Temperature Conversion"<<"\n";
+        cin >> pick_choice;
+        system("cls");
+
+        switch (pick_choice)
+        {
+        case 1:
+            moneyconversion();
+            break;
+        case 2:
+            temperatureconversion();
+            break;
+        default:
+            break;
+        }
+    }
+    else
+    {
+        cout << "Thank you for using the convertor , have a good day :) ";
     }
 }
 void moneyconversion()
@@ -400,8 +471,8 @@ int main()
             cout << endl;
             int choice;
             printWithTyping("Hello user welcome to The Information Bot", 30);
-            printWithTyping("Available Data :", 30);
-            printWithTyping("1: conversion of Currency ", 20);
+            printWithTyping("Available Conversions :", 30);
+            printWithTyping("1: Conversion of Currency ", 20);
             printWithTyping("2: Conversion of Temperature", 20);
             printWithTyping("Pick a choice from above :", 20);
             cin >> choice;
