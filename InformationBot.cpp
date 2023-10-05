@@ -190,7 +190,7 @@ void convertingTemperature(int FromTemperature, int ToTemperature, float value)
     }
     cout << endl
          << "\n";
-    cout << "Do you want to use convertor again ? ";
+    cout << "Do you want to use convertor again ? (yes/no)";
     cin >> choice;
     if (choice == "yes")
     {
@@ -379,7 +379,7 @@ void converting_Money(int From, int To, float amount)
     }
     cout << endl
          << "\n";
-    cout << "Do you want to use convertor again ? ";
+    cout << "Do you want to use convertor again ? (yes/no) ";
     cin >> choice;
     if (choice == "yes")
     {
