@@ -1,10 +1,4 @@
-#include <iostream>
-#include <iomanip>
-#include <chrono>
-#include <thread>
-#include <map>
-#include <string>
-#include <stdlib.h>
+#include <bits/stdc++.h>
 using namespace std;
 void convertingTemperature(int FromTemperature, int ToTemperature, float value);
 void moneyconversion();
